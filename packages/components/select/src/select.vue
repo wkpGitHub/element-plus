@@ -15,6 +15,8 @@
       :popper-options="popperOptions"
       :fallback-placements="fallbackPlacements"
       :effect="effect"
+      :show-arrow="false"
+      :offset="4"
       pure
       trigger="click"
       :transition="`${nsSelect.namespace.value}-zoom-in-top`"

@@ -9,7 +9,7 @@
 @use './option-group.scss';
 
 @mixin mixed-input-border($color) {
-  box-shadow: 0 0 0 1px $color inset;
+  border: 1px solid $color;
 }
 
 @include b(select) {
@@ -91,10 +91,8 @@
     align-items: center;
     flex-shrink: 0;
     gap: map.get($select-item-gap, 'default');
-    color: var(
-      #{getCssVarName('input-icon-color')},
-      map.get($input, 'icon-color')
-    );
+    color: var(#{getCssVarName('input-icon-color')},
+      map.get($input, 'icon-color'));
   }
 
   @include e(suffix) {
@@ -102,10 +100,8 @@
     align-items: center;
     flex-shrink: 0;
     gap: map.get($select-item-gap, 'default');
-    color: var(
-      #{getCssVarName('input-icon-color')},
-      map.get($input, 'icon-color')
-    );
+    color: var(#{getCssVarName('input-icon-color')},
+      map.get($input, 'icon-color'));
   }
 
   @include e(caret) {
@@ -166,10 +162,8 @@
     transform: translateY(-50%);
     width: 100%;
     @include utils-ellipsis;
-    color: var(
-      #{getCssVarName('input-text-color')},
-      map.get($input, 'text-color')
-    );
+    color: var(#{getCssVarName('input-text-color')},
+      map.get($input, 'text-color'));
 
     @include when(transparent) {
       user-select: none;
@@ -178,11 +172,9 @@
   }
 
   @include e(popper) {
-    @include picker-popper(
-      map.get($select-dropdown, 'bg-color'),
+    @include picker-popper(map.get($select-dropdown, 'bg-color'),
       map.get($select-dropdown, 'border'),
-      map.get($select-dropdown, 'shadow')
-    );
+      map.get($select-dropdown, 'shadow'));
   }
 
   @include e(input-wrapper) {

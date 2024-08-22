@@ -5,27 +5,27 @@
 @use 'common/var' as *;
 
 @mixin inset-prepend-border($color) {
-  box-shadow: 1px 0 0 0 $color inset, 0 1px 0 0 $color inset,
-    0 -1px 0 0 $color inset;
+  border: 1px solid $color;
+  border-right: 0;
 }
 
 @mixin inset-append-border($color) {
-  box-shadow: 0 1px 0 0 $color inset, 0 -1px 0 0 $color inset,
-    -1px 0 0 0 $color inset;
+  border: 1px solid $color;
+  border-left: 0;
 }
 
 @mixin inset-prepend-input-border($color) {
-  box-shadow: 1px 0 0 0 $color inset, 1px 0 0 0 $color, 0 1px 0 0 $color inset,
-    0 -1px 0 0 $color inset !important;
+  border: 1px solid $color;
+  border-right: 0;
 }
 
 @mixin inset-append-input-border($color) {
-  box-shadow: -1px 0 0 0 $color, -1px 0 0 0 $color inset, 0 1px 0 0 $color inset,
-    0 -1px 0 0 $color inset !important;
+  border: 1px solid $color;
+  border-left: 0;
 }
 
 @mixin mixed-input-border($color) {
-  box-shadow: 0 0 0 1px $color inset;
+  border: 1px solid $color;
 }
 
 @include b(textarea) {
@@ -49,34 +49,21 @@
     width: 100%;
     font-size: inherit;
     font-family: inherit;
-    color: var(
-      #{getCssVarName('input-text-color')},
-      map.get($input, 'text-color')
-    );
-    background-color: var(
-      #{getCssVarName('input-bg-color')},
-      map.get($input, 'bg-color')
-    );
+    color: var(#{getCssVarName('input-text-color')},
+      map.get($input, 'text-color'));
+    background-color: var(#{getCssVarName('input-bg-color')},
+      map.get($input, 'bg-color'));
     background-image: none;
     -webkit-appearance: none;
-    @include inset-input-border(
-      var(
-        #{getCssVarName('input-border-color')},
-        map.get($input, 'border-color')
-      )
-    );
-    border-radius: getCssVarWithDefault(
-      'input-border-radius',
-      map.get($input, 'border-radius')
-    );
+    @include inset-input-border(var(#{getCssVarName('input-border-color')},
+        map.get($input, 'border-color')));
+    border-radius: getCssVarWithDefault('input-border-radius',
+        map.get($input, 'border-radius'));
     transition: getCssVar('transition-box-shadow');
-    border: none;
 
     &::placeholder {
-      color: getCssVarWithDefault(
-        'input-placeholder-color',
-        map.get($input, 'placeholder-color')
-      );
+      color: getCssVarWithDefault('input-placeholder-color',
+          map.get($input, 'placeholder-color'));
     }
 
     &:hover {
@@ -170,25 +157,17 @@
     flex-grow: 1;
     align-items: center;
     justify-content: center;
-    padding: $border-width map.get($input-padding-horizontal, 'default')-$border-width;
-    background-color: var(
-      #{getCssVarName('input-bg-color')},
-      map.get($input, 'bg-color')
-    );
+    padding: 0 map.get($input-padding-horizontal, 'default');
+    background-color: var(#{getCssVarName('input-bg-color')},
+      map.get($input, 'bg-color'));
     background-image: none;
-    border-radius: getCssVarWithDefault(
-      'input-border-radius',
-      map.get($input, 'border-radius')
-    );
+    border-radius: getCssVarWithDefault('input-border-radius',
+        map.get($input, 'border-radius'));
     cursor: text;
     transition: getCssVar('transition-box-shadow');
     transform: translate3d(0, 0, 0);
-    @include inset-input-border(
-      var(
-        #{getCssVarName('input-border-color')},
-        map.get($input, 'border-color')
-      )
-    );
+    @include inset-input-border(var(#{getCssVarName('input-border-color')},
+        map.get($input, 'border-color')));
 
     &:hover {
       @include inset-input-border(#{getCssVar('input', 'hover-border-color')});
@@ -201,23 +180,15 @@
 
   @include e(inner) {
     // use map.get as default value for date picker range
-    @include set-css-var-value(
-      'input-inner-height',
-      calc(
-        var(
-            #{getCssVarName('input-height')},
-            #{map.get($input-height, 'default')}
-          ) - $border-width * 2
-      )
-    );
+    @include set-css-var-value('input-inner-height',
+      calc(var(#{getCssVarName('input-height')},
+          #{map.get($input-height, 'default')}) - $border-width * 2));
 
     width: 100%;
     flex-grow: 1;
     -webkit-appearance: none;
-    color: var(
-      #{getCssVarName('input-text-color')},
-      map.get($input, 'text-color')
-    );
+    color: var(#{getCssVarName('input-text-color')},
+      map.get($input, 'text-color'));
     font-size: inherit;
     height: getCssVar('input-inner-height');
     line-height: getCssVar('input-inner-height');
@@ -232,10 +203,8 @@
     }
 
     &::placeholder {
-      color: getCssVarWithDefault(
-        'input-placeholder-color',
-        map.get($input, 'placeholder-color')
-      );
+      color: getCssVarWithDefault('input-placeholder-color',
+          map.get($input, 'placeholder-color'));
     }
 
     // override edge default style
@@ -256,10 +225,8 @@
       flex-wrap: nowrap;
       height: 100%;
       text-align: center;
-      color: var(
-        #{getCssVarName('input-icon-color')},
-        map.get($input, 'icon-color')
-      );
+      color: var(#{getCssVarName('input-icon-color')},
+        map.get($input, 'icon-color'));
       transition: all getCssVar('transition-duration');
       pointer-events: none;
     }
@@ -270,18 +237,21 @@
       align-items: center;
       justify-content: center;
 
-      @if $slot == prefix {
+      @if $slot ==prefix {
         > :last-child {
           margin-right: 8px;
         }
 
         > :first-child {
+
           &,
           &.#{$namespace}-input__icon {
             margin-left: 0;
           }
         }
-      } @else {
+      }
+
+      @else {
         > :first-child {
           margin-left: 8px;
         }
@@ -305,12 +275,8 @@
 
   @include when(active) {
     .#{$namespace}-input__wrapper {
-      @include mixed-input-border(
-        var(
-          #{getCssVarName('input-focus-color')},
-          map.get($input, 'focus-color')
-        )
-      );
+      @include mixed-input-border(var(#{getCssVarName('input-focus-color')},
+          map.get($input, 'focus-color')));
     }
   }
 
@@ -360,15 +326,9 @@
       }
 
       @include e(inner) {
-        @include set-css-var-value(
-          'input-inner-height',
-          calc(
-            var(
-                #{getCssVarName('input-height')},
-                #{map.get($input-height, $size)}
-              ) - $border-width * 2
-          )
-        );
+        @include set-css-var-value('input-inner-height',
+          calc(var(#{getCssVarName('input-height')},
+              #{map.get($input-height, $size)}) - $border-width * 2));
       }
     }
   }
@@ -380,7 +340,7 @@
   align-items: stretch;
 
   @include e((append, prepend)) {
-    background-color: getCssVar('fill-color', 'light');
+    background-color: transparent;
     color: getCssVar('color-info');
     position: relative;
     display: inline-flex;
@@ -431,7 +391,7 @@
   }
 
   @include m(prepend) {
-    > .#{$namespace}-input__wrapper {
+    >.#{$namespace}-input__wrapper {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
@@ -441,14 +401,14 @@
         .#{$namespace}-select__wrapper {
           border-top-right-radius: 0;
           border-bottom-right-radius: 0;
-          @include inset-prepend-border(#{getCssVar('input-border-color')});
+          border: 1px solid transparent;
         }
       }
     }
   }
 
   @include m(append) {
-    > .#{$namespace}-input__wrapper {
+    >.#{$namespace}-input__wrapper {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
@@ -458,7 +418,7 @@
         .#{$namespace}-select__wrapper {
           border-top-left-radius: 0;
           border-bottom-left-radius: 0;
-          @include inset-append-border(#{getCssVar('input-border-color')});
+          border: 0;
         }
       }
     }

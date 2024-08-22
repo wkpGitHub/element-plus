@@ -8,12 +8,15 @@
 
 // Break-points
 @mixin res($key, $map: $breakpoints) {
+
   // loop breakpoint Map, return if present
   @if map-has-key($map, $key) {
     @media only screen and #{unquote(map-get($map, $key))} {
       @content;
     }
-  } @else {
+  }
+
+  @else {
     @warn "Undefined points: `#{$map}`";
   }
 }
@@ -65,25 +68,18 @@
   $E: $element !global;
   $selector: &;
   $currentSelector: '';
+
   @each $unit in $element {
     $currentSelector: #{$currentSelector +
-      '.' +
-      $B +
-      $element-separator +
-      $unit +
-      ','};
+ '.' + $B + $element-separator + $unit + ','
   }
 
-  @if hitAllSpecialNestRule($selector) {
-    @at-root {
-      #{$selector} {
-        #{$currentSelector} {
-          @content;
-        }
-      }
-    }
-  } @else {
-    @at-root {
+  ;
+}
+
+@if hitAllSpecialNestRule($selector) {
+  @at-root {
+    #{$selector} {
       #{$currentSelector} {
         @content;
       }
@@ -91,22 +87,32 @@
   }
 }
 
-@mixin m($modifier) {
-  $selector: &;
-  $currentSelector: '';
-  @each $unit in $modifier {
-    $currentSelector: #{$currentSelector +
-      $selector +
-      $modifier-separator +
-      $unit +
-      ','};
-  }
-
+@else {
   @at-root {
     #{$currentSelector} {
       @content;
     }
   }
+}
+}
+
+@mixin m($modifier) {
+  $selector: &;
+  $currentSelector: '';
+
+  @each $unit in $modifier {
+    $currentSelector: #{$currentSelector +
+ $selector + $modifier-separator + $unit + ','
+  }
+
+  ;
+}
+
+@at-root {
+  #{$currentSelector} {
+    @content;
+  }
+}
 }
 
 @mixin configurable-m($modifier, $E-flag: false) {
@@ -126,12 +132,10 @@
   }
 }
 
-@mixin spec-selector(
-  $specSelector: '',
+@mixin spec-selector($specSelector: '',
   $element: $E,
   $modifier: false,
-  $block: $B
-) {
+  $block: $B) {
   $modifierCombo: '';
 
   @if $modifier {
@@ -140,12 +144,13 @@
 
   @at-root {
     #{&}#{$specSelector}.#{$block
-      + $element-separator
-      + $element
-      + $modifierCombo} {
-      @content;
-    }
++$element-separator +$element +$modifierCombo
   }
+
+    {
+    @content;
+  }
+}
 }
 
 @mixin meb($modifier: false, $element: $E, $block: $B) {
@@ -187,8 +192,8 @@
 
 @mixin pseudo($pseudo) {
   @at-root #{&}#{':#{$pseudo}'} {
-    @content;
-  }
+@content;
+}
 }
 
 @mixin picker-popper($background, $border, $box-shadow) {
@@ -204,9 +209,7 @@
     }
 
     @each $placement,
-      $adjacency
-        in ('top': 'left', 'bottom': 'right', 'left': 'bottom', 'right': 'top')
-    {
+    $adjacency in ('top': 'left', 'bottom': 'right', 'left': 'bottom', 'right': 'top') {
       &[data-popper-placement^='#{$placement}'] {
         .#{$namespace}-popper__arrow::before {
           border-#{$placement}-color: transparent;
@@ -227,9 +230,11 @@
 }
 
 @mixin inset-input-border($color, $important: false) {
-  @if $important == true {
-    box-shadow: 0 0 0 1px $color inset !important;
-  } @else {
-    box-shadow: 0 0 0 1px $color inset;
+  @if $important ==true {
+    border: 1px solid $color !important;
+  }
+
+  @else {
+    border: 1px solid $color;
   }
 }

@@ -7,6 +7,8 @@
     :popper-class="[ns.e('popper'), popperClass]"
     :teleported="teleported"
     :gpu-acceleration="false"
+    :show-arrow="false"
+    :offset="4"
     pure
     manual-mode
     effect="light"

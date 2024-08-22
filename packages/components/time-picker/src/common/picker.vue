@@ -4,6 +4,8 @@
     :visible="pickerVisible"
     effect="light"
     pure
+    :show-arrow="false"
+    :offset="4"
     trigger="click"
     v-bind="$attrs"
     role="dialog"

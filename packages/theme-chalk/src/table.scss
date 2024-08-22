@@ -16,7 +16,7 @@
   width: 100%;
   max-width: 100%;
   background-color: getCssVar('table-bg-color');
-  font-size: 14px;
+  font-size: 12px;
   color: getCssVar('table-text-color');
 
   @include e(inner-wrapper) {
@@ -24,14 +24,6 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-
-    // 表格底部伪 border，总是有的
-    &::before {
-      @include extend-rule(border-pseudo);
-      left: 0;
-      bottom: 0;
-      height: 1px;
-    }
   }
 
   tbody {
@@ -41,6 +33,7 @@
   }
 
   &.has-footer {
+
     &.#{$namespace}-table--scrollable-y,
     &.#{$namespace}-table--fluid-height {
       tr:last-child td.#{$namespace}-table__cell {
@@ -90,7 +83,7 @@
       transform: rotate(90deg);
     }
 
-    > .#{$namespace}-icon {
+    >.#{$namespace}-icon {
       font-size: 12px;
     }
   }
@@ -125,12 +118,6 @@
     .#{$namespace}-table__cell.gutter {
       border-right-width: 1px;
     }
-
-    @include e(inner-wrapper) {
-      &::before {
-        width: 100%;
-      }
-    }
   }
 
   thead {
@@ -148,7 +135,8 @@
   }
 
   .#{$namespace}-table__cell {
-    padding: map.get($table-padding, 'default');
+    padding: 4px 0;
+    height: 40px;
     min-width: 0;
     box-sizing: border-box;
     text-overflow: ellipsis;
@@ -173,7 +161,7 @@
     }
 
     &.is-hidden {
-      > * {
+      >* {
         visibility: hidden;
       }
     }
@@ -185,8 +173,8 @@
     text-overflow: ellipsis;
     white-space: normal;
     overflow-wrap: break-word;
-    line-height: 23px;
-    padding: 0 12px;
+    padding: 0 8px;
+    line-height: 16px;
 
     &.#{$namespace}-tooltip {
       white-space: nowrap;
@@ -228,11 +216,11 @@
   th.#{$namespace}-table__cell {
     background-color: getCssVar('table-header-bg-color');
 
-    > .cell.highlight {
+    >.cell.highlight {
       color: getCssVar('color-primary');
     }
 
-    &.required > div::before {
+    &.required>div::before {
       display: inline-block;
       content: '';
       width: 8px;
@@ -266,31 +254,28 @@
 
   // table--border
   @include m(border) {
-    @include e(inner-wrapper) {
-      &::after {
-        @include extend-rule(border-pseudo);
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 1px;
-        z-index: calc(getCssVar('table-index') + 2);
-      }
-    }
 
+    // &::before {
+    //   z-index: 9;
+    //   right: 0;
+    //   top: 0;
+    //   bottom: 0;
+    //   background: transparent;
+    //   border: 1px solid #ccc;
+    //   border-radius: inherit;
+    //   pointer-events: none;
+    // }
     &::before {
       @include extend-rule(border-pseudo);
-      top: -1px;
-      left: 0;
-      width: 1px;
-      height: 100%;
-    }
-
-    &::after {
-      @include extend-rule(border-pseudo);
-      top: -1px;
+      z-index: 9;
       right: 0;
-      width: 1px;
-      height: 100%;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      background: transparent;
+      border: getCssVar('table-border');
+      border-radius: inherit;
+      pointer-events: none;
     }
 
     @include e(inner-wrapper) {
@@ -325,8 +310,10 @@
     width: 100%;
 
     tr {
+
       td,
       th {
+
         &.#{$namespace}-table-fixed-column--left,
         &.#{$namespace}-table-fixed-column--right {
           position: sticky !important;
@@ -378,6 +365,7 @@
 
     tr {
       th {
+
         &.#{$namespace}-table-fixed-column--left,
         &.#{$namespace}-table-fixed-column--right {
           background-color: getCssVar('table-header-bg-color');
@@ -412,7 +400,7 @@
 
   @include e((header-wrapper, body-wrapper)) {
     .#{$namespace}-table-column--selection {
-      > .cell {
+      >.cell {
         display: inline-flex;
         align-items: center;
         height: 23px;
@@ -481,8 +469,10 @@
   }
 
   @include when(scrolling-none) {
+
     .#{$namespace}-table-fixed-column--left,
     .#{$namespace}-table-fixed-column--right {
+
       &.is-first-column,
       &.is-last-column {
         &::before {
@@ -567,22 +557,24 @@
 
   @include e(body) {
     tr.hover-row {
+
       &,
       &.#{$namespace}-table__row--striped {
+
         &,
         &.current-row {
-          > td.#{$namespace}-table__cell {
+          >td.#{$namespace}-table__cell {
             background-color: getCssVar('table-row-hover-bg-color');
           }
         }
       }
     }
 
-    tr > td.hover-cell {
+    tr>td.hover-cell {
       background-color: getCssVar('table-row-hover-bg-color');
     }
 
-    tr.current-row > td.#{$namespace}-table__cell {
+    tr.current-row>td.#{$namespace}-table__cell {
       background-color: getCssVar('table-current-row-bg-color');
     }
   }
@@ -656,7 +648,7 @@
   }
 
   @include m(enable-row-hover) {
-    .#{$namespace}-table__body tr:hover > td.#{$namespace}-table__cell {
+    .#{$namespace}-table__body tr:hover>td.#{$namespace}-table__cell {
       background-color: getCssVar('table-row-hover-bg-color');
     }
   }
@@ -685,7 +677,7 @@
       border-right: none;
     }
 
-    > .#{$namespace}-table__inner-wrapper {
+    >.#{$namespace}-table__inner-wrapper {
       &::after {
         content: none;
       }
