@@ -209,6 +209,8 @@ export const SelectProps = buildProps({
    * @description in remote search method show suffix icon
    */
   remoteShowSuffix: Boolean,
+  // 是否是标签形式，用于带颜色的选择器
+  tag: Boolean,
   /**
    * @description position of dropdown
    */

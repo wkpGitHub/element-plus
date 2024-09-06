@@ -260,6 +260,19 @@ export const useSelect = (props: ISelectProps, emit) => {
       : states.selectedLabel
   })
 
+  const currentAttrs = computed(() => {
+    const _placeholder = props.placeholder ?? t('el.select.placeholder')
+    if (props.multiple || !hasModelValue.value) {
+      return {}
+    } else {
+      const list = Array.from(states.options.values())
+      const { $attrs } = list.find(
+        (item) => item.value === props.modelValue
+      ) || { $attrs: {} }
+      return $attrs
+    }
+  })
+
   // iOS Safari does not handle click events when a mouseenter event is registered and a DOM-change happens in a child
   // We use a Vue custom event binding to only register the event on non-iOS devices
   // ref.: https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/HandlingEvents/HandlingEvents.html
@@ -431,6 +444,7 @@ export const useSelect = (props: ISelectProps, emit) => {
         : cachedOption.value === value
       if (isEqualValue) {
         option = {
+          $attrs: cachedOption.$attrs,
           value,
           currentLabel: cachedOption.currentLabel,
           get isDisabled() {
@@ -444,8 +458,8 @@ export const useSelect = (props: ISelectProps, emit) => {
     const label = isObjectValue
       ? value.label
       : !isNull && !isUndefined
-      ? value
-      : ''
+        ? value
+        : ''
     const newOption = {
       value,
       currentLabel: label,
@@ -861,7 +875,7 @@ export const useSelect = (props: ISelectProps, emit) => {
     dropdownMenuVisible,
     showTagList,
     collapseTagList,
-
+    currentAttrs,
     // computed style
     tagStyle,
     collapseTagStyle,

@@ -1,27 +1,18 @@
 <template>
-  <span
-    v-if="disableTransitions"
-    :class="containerKls"
-    :style="{ backgroundColor: color }"
-    @click="handleClick"
-  >
+  <span v-if="disableTransitions" :class="containerKls" :style="tagStyle" @click="handleClick">
     <span :class="ns.e('content')">
       <slot />
     </span>
-    <el-icon v-if="closable" :class="ns.e('close')" @click.stop="handleClose">
+    <el-icon v-if="closable" :class="ns.e('close')" :style="closeIconStyle" @click.stop="handleClose">
       <Close />
     </el-icon>
   </span>
   <transition v-else :name="`${ns.namespace.value}-zoom-in-center`" appear>
-    <span
-      :class="containerKls"
-      :style="{ backgroundColor: color }"
-      @click="handleClick"
-    >
+    <span :class="containerKls" :style="tagStyle" @click="handleClick">
       <span :class="ns.e('content')">
         <slot />
       </span>
-      <el-icon v-if="closable" :class="ns.e('close')" @click.stop="handleClose">
+      <el-icon v-if="closable" :class="ns.e('close')" :style="closeIconStyle" @click.stop="handleClose">
         <Close />
       </el-icon>
     </span>
@@ -29,41 +20,59 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
-import ElIcon from '@element-plus/components/icon'
-import { Close } from '@element-plus/icons-vue'
-import { useNamespace } from '@element-plus/hooks'
-import { useFormSize } from '@element-plus/components/form'
+  import { computed } from 'vue'
+  import ElIcon from '@element-plus/components/icon'
+  import { Close } from '@element-plus/icons-vue'
+  import { useNamespace } from '@element-plus/hooks'
+  import { useFormSize } from '@element-plus/components/form'
 
-import { tagEmits, tagProps } from './tag'
+  import { tagEmits, tagProps } from './tag'
 
-defineOptions({
-  name: 'ElTag',
-})
-const props = defineProps(tagProps)
-const emit = defineEmits(tagEmits)
+  defineOptions({
+    name: 'ElTag',
+  })
+  const props = defineProps(tagProps)
+  const emit = defineEmits(tagEmits)
 
-const tagSize = useFormSize()
-const ns = useNamespace('tag')
-const containerKls = computed(() => {
-  const { type, hit, effect, closable, round } = props
-  return [
-    ns.b(),
-    ns.is('closable', closable),
-    ns.m(type || 'primary'),
-    ns.m(tagSize.value),
-    ns.m(effect),
-    ns.is('hit', hit),
-    ns.is('round', round),
-  ]
-})
+  const tagStyle = computed(() => {
+    if (!props.color) return {}
+    if (props.effect === 'plain') {
+      return { '--el-tag-text-color': props.color, 'border-color': props.color }
+    } else {
+      return { backgroundColor: props.color, 'border-color': props.color }
+    }
+  })
 
-// methods
-const handleClose = (event: MouseEvent) => {
-  emit('close', event)
-}
+  const closeIconStyle = computed(() => {
+    if (!props.color) return {}
+    if (props.effect === 'plain') {
+      return { '--el-tag-hover-color': props.color }
+    } else {
+      return { '--el-tag-hover-color': 'rgba(255,255,255,0.3)' }
+    }
+  })
 
-const handleClick = (event: MouseEvent) => {
-  emit('click', event)
-}
+  const tagSize = useFormSize()
+  const ns = useNamespace('tag')
+  const containerKls = computed(() => {
+    const { type, hit, effect, closable, round } = props
+    return [
+      ns.b(),
+      ns.is('closable', closable),
+      ns.m(type || 'primary'),
+      ns.m(tagSize.value),
+      ns.m(effect),
+      ns.is('hit', hit),
+      ns.is('round', round),
+    ]
+  })
+
+  // methods
+  const handleClose = (event: MouseEvent) => {
+    emit('close', event)
+  }
+
+  const handleClick = (event: MouseEvent) => {
+    emit('click', event)
+  }
 </script>
