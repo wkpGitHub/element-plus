@@ -9,7 +9,7 @@ import type {
   CascaderNode,
   CascaderValue,
 } from '@element-plus/components/cascader-panel'
-import type { Placement } from '@element-plus/components/popper'
+import type { Options, Placement } from '@element-plus/components/popper'
 
 export const cascaderProps = buildProps({
   ...CommonProps,
@@ -110,6 +110,13 @@ export const cascaderProps = buildProps({
   popperClass: {
     type: String,
     default: '',
+  },
+  /**
+   * @description [popper.js](https://popper.js.org/docs/v2/) parameters
+   */
+  popperOptions: {
+    type: definePropType<Partial<Options>>(Object),
+    default: () => ({} as Partial<Options>),
   },
   /**
    * @description whether cascader popup is teleported

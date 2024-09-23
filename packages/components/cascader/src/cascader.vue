@@ -11,6 +11,8 @@
     :placement="placement"
     :transition="`${nsCascader.namespace.value}-zoom-in-top`"
     effect="light"
+    :show-arrow="false"
+    :offset="4"
     pure
     :persistent="persistent"
     @hide="hideSuggestionPanel"
@@ -217,7 +219,6 @@ import {
 import { ArrowDown, Check, CircleClose } from '@element-plus/icons-vue'
 import { cascaderEmits, cascaderProps } from './cascader'
 
-import type { Options } from '@element-plus/components/popper'
 import type { ComputedRef, Ref, StyleValue } from 'vue'
 import type { TooltipInstance } from '@element-plus/components/tooltip'
 import type { InputInstance } from '@element-plus/components/input'
@@ -229,21 +230,6 @@ import type {
   Tag,
 } from '@element-plus/components/cascader-panel'
 
-const popperOptions: Partial<Options> = {
-  modifiers: [
-    {
-      name: 'arrowPosition',
-      enabled: true,
-      phase: 'main',
-      fn: ({ state }) => {
-        const { modifiersData, placement } = state as any
-        if (['right', 'left', 'bottom', 'top'].includes(placement)) return
-        modifiersData.arrow.x = 35
-      },
-      requires: ['arrow'],
-    },
-  ],
-}
 const COMPONENT_NAME = 'ElCascader'
 
 defineOptions({

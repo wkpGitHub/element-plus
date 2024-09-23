@@ -131,8 +131,7 @@
             <button
               v-if="unlinkPanels"
               type="button"
-              :disabled="!enableYearArrow"
-              :class="[ppNs.e('icon-btn'), { 'is-disabled': !enableYearArrow }]"
+              :class="[ppNs.e('icon-btn')]"
               :aria-label="t(`el.datepicker.nextYear`)"
               class="d-arrow-right"
               @click="leftNextYear"
@@ -144,11 +143,7 @@
             <button
               v-if="unlinkPanels"
               type="button"
-              :disabled="!enableMonthArrow"
-              :class="[
-                ppNs.e('icon-btn'),
-                { 'is-disabled': !enableMonthArrow },
-              ]"
+              :class="[ppNs.e('icon-btn')]"
               :aria-label="t(`el.datepicker.nextMonth`)"
               class="arrow-right"
               @click="leftNextMonth"
@@ -177,8 +172,7 @@
             <button
               v-if="unlinkPanels"
               type="button"
-              :disabled="!enableYearArrow"
-              :class="[ppNs.e('icon-btn'), { 'is-disabled': !enableYearArrow }]"
+              :class="[ppNs.e('icon-btn')]"
               :aria-label="t(`el.datepicker.prevYear`)"
               class="d-arrow-left"
               @click="rightPrevYear"
@@ -190,11 +184,7 @@
             <button
               v-if="unlinkPanels"
               type="button"
-              :disabled="!enableMonthArrow"
-              :class="[
-                ppNs.e('icon-btn'),
-                { 'is-disabled': !enableMonthArrow },
-              ]"
+              :class="[ppNs.e('icon-btn')]"
               :aria-label="t(`el.datepicker.prevMonth`)"
               class="arrow-left"
               @click="rightPrevMonth"

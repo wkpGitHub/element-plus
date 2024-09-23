@@ -27,7 +27,7 @@
       }
     }
 
-    > span {
+    >span {
       flex: 1;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -58,7 +58,7 @@
   &:not(.is-disabled):hover {
     .#{$namespace}-input__wrapper {
       cursor: pointer;
-      box-shadow: 0 0 0 1px getCssVar('input', 'hover-border-color') inset;
+      border: 1px solid getCssVar('input', 'hover-border-color');
     }
   }
 
@@ -91,20 +91,14 @@
     }
 
     .icon-circle-close:hover {
-      color: var(
-        #{getCssVarName('input', 'clear-hover-color')},
-        map.get($input, 'clear-hover-color')
-      );
+      color: var(#{getCssVarName('input', 'clear-hover-color')},
+        map.get($input, 'clear-hover-color'));
     }
 
     @include when(focus) {
       .#{$namespace}-input__wrapper {
-        box-shadow: 0 0 0 1px
-          var(
-            #{getCssVarName('input', 'focus-border-color')},
-            map.get($input, 'focus-border-color')
-          )
-          inset;
+        border: 1px solid var(#{getCssVarName('input', 'focus-border-color')},
+          map.get($input, 'focus-border-color'));
       }
     }
   }
@@ -131,11 +125,9 @@
     font-size: getCssVar('cascader-menu-font-size');
     border-radius: getCssVar('cascader-menu-radius');
 
-    @include picker-popper(
-      getCssVar('cascader-menu-fill'),
+    @include picker-popper(getCssVar('cascader-menu-fill'),
       getCssVar('cascader-menu-border'),
-      getCssVar('cascader-menu-shadow')
-    );
+      getCssVar('cascader-menu-shadow'));
 
     &.#{$namespace}-popper {
       box-shadow: getCssVar('cascader-menu-shadow');
@@ -199,7 +191,7 @@
       font-weight: bold;
     }
 
-    > span {
+    >span {
       margin-right: 10px;
     }
   }

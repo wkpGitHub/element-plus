@@ -28,7 +28,6 @@
             <button
               v-if="unlinkPanels"
               type="button"
-              :disabled="!enableYearArrow"
               :class="leftPanelKls.arrowRightBtn"
               @click="leftNextYear"
             >
@@ -55,7 +54,6 @@
             <button
               v-if="unlinkPanels"
               type="button"
-              :disabled="!enableYearArrow"
               :class="rightPanelKls.arrowLeftBtn"
               @click="rightPrevYear"
             >
@@ -137,22 +135,14 @@ const leftPanelKls = computed(() => {
   return {
     content: [ppNs.e('content'), drpNs.e('content'), 'is-left'],
     arrowLeftBtn: [ppNs.e('icon-btn'), 'd-arrow-left'],
-    arrowRightBtn: [
-      ppNs.e('icon-btn'),
-      { [ppNs.is('disabled')]: !enableYearArrow.value },
-      'd-arrow-right',
-    ],
+    arrowRightBtn: [ppNs.e('icon-btn'), 'd-arrow-right'],
   }
 })
 
 const rightPanelKls = computed(() => {
   return {
     content: [ppNs.e('content'), drpNs.e('content'), 'is-right'],
-    arrowLeftBtn: [
-      ppNs.e('icon-btn'),
-      { 'is-disabled': !enableYearArrow.value },
-      'd-arrow-left',
-    ],
+    arrowLeftBtn: [ppNs.e('icon-btn'), 'd-arrow-left'],
     arrowRightBtn: [ppNs.e('icon-btn'), 'd-arrow-right'],
   }
 })

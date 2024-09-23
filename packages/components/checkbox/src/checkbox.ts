@@ -52,14 +52,14 @@ export const checkboxProps = {
    * @description value of the Checkbox if it's checked
    */
   trueValue: {
-    type: [String, Number],
+    type: [String, Boolean, Number, Object],
     default: undefined,
   },
   /**
    * @description value of the Checkbox if it's not checked
    */
   falseValue: {
-    type: [String, Number],
+    type: [String, Boolean, Number, Object],
     default: undefined,
   },
   /**

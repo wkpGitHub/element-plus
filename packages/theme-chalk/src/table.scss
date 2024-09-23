@@ -46,7 +46,7 @@
   @include e(empty-block) {
     position: sticky;
     left: 0;
-    min-height: 60px;
+    min-height: 40px;
     text-align: center;
     width: 100%;
     display: flex;
@@ -57,7 +57,7 @@
   @include e(empty-text) {
     // min-height doesn't work in IE10 and IE11 https://github.com/philipwalton/flexbugs#3-min-height-on-a-flex-container-wont-apply-to-its-flex-items
     // set empty text line height up to contrainer min-height as workaround.
-    line-height: 60px;
+    line-height: 40px;
     width: 50%;
     color: getCssVar('text-color', 'secondary');
   }
@@ -174,7 +174,7 @@
     white-space: normal;
     overflow-wrap: break-word;
     padding: 0 8px;
-    line-height: 16px;
+    line-height: 15px;
 
     &.#{$namespace}-tooltip {
       white-space: nowrap;
