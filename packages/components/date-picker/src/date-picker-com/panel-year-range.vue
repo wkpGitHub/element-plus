@@ -156,16 +156,10 @@ const {
   rightPrevYear,
   leftLabel,
   rightLabel,
-  leftYear,
-  rightYear,
 } = useYearRangeHeader({
   unlinkPanels: toRef(props, 'unlinkPanels'),
   leftDate,
   rightDate,
-})
-
-const enableYearArrow = computed(() => {
-  return props.unlinkPanels && rightYear.value > leftYear.value + 1
 })
 
 const minDate = ref<Dayjs>()

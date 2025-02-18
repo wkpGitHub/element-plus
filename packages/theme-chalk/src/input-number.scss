@@ -52,12 +52,7 @@
       color: getCssVar('color-primary');
 
       & ~ .#{$namespace}-input:not(.is-disabled) .#{$namespace}-input__wrapper {
-        box-shadow: 0 0 0 1px
-          var(
-            #{getCssVarName('input', 'focus-border-color')},
-            map.get($input, 'focus-border-color')
-          )
-          inset;
+        border: 1px solid map.get($input, 'focus-border-color');
       }
     }
 

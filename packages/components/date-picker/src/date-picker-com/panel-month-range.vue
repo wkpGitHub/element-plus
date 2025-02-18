@@ -163,16 +163,10 @@ const {
   rightPrevYear,
   leftLabel,
   rightLabel,
-  leftYear,
-  rightYear,
 } = useMonthRangeHeader({
   unlinkPanels: toRef(props, 'unlinkPanels'),
   leftDate,
   rightDate,
-})
-
-const enableYearArrow = computed(() => {
-  return props.unlinkPanels && rightYear.value > leftYear.value + 1
 })
 
 type RangePickValue = {

@@ -360,22 +360,6 @@ const rightLabel = computed(() => {
   )}`
 })
 
-const leftYear = computed(() => {
-  return leftDate.value.year()
-})
-
-const leftMonth = computed(() => {
-  return leftDate.value.month()
-})
-
-const rightYear = computed(() => {
-  return rightDate.value.year()
-})
-
-const rightMonth = computed(() => {
-  return rightDate.value.month()
-})
-
 const hasShortcuts = computed(() => !!shortcuts.value.length)
 
 const minVisibleDate = computed(() => {
@@ -484,26 +468,6 @@ const handlePanelChange = (mode: 'month' | 'year') => {
     mode
   )
 }
-
-const enableMonthArrow = computed(() => {
-  const nextMonth = (leftMonth.value + 1) % 12
-  const yearOffset = leftMonth.value + 1 >= 12 ? 1 : 0
-  return (
-    props.unlinkPanels &&
-    new Date(leftYear.value + yearOffset, nextMonth) <
-      new Date(rightYear.value, rightMonth.value)
-  )
-})
-
-const enableYearArrow = computed(() => {
-  return (
-    props.unlinkPanels &&
-    rightYear.value * 12 +
-      rightMonth.value -
-      (leftYear.value * 12 + leftMonth.value + 1) >=
-      12
-  )
-})
 
 const btnDisabled = computed(() => {
   return !(
